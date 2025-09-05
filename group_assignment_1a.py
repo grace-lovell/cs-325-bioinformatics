@@ -34,6 +34,17 @@ def ValidateCSeqs(starts, ends):
                 validPromoters.append((s, e))
     return validPromoters
 
+# This function scores the promoters on a scale from 0%-100%. For part 1, as long as it is a valid promoter it will havea  score of 100%.
+# For part 2 this function, as well as the FindIndexOfCSeqs function will be updated to accomodate scoring for fuzzy matching.
+def ScorePromoters(DNA: str, validPromoters):
+    start_motif = "TTGACA"
+    end_motif = "TATAAT"
+    scored = []
+    for s, e in validPromoters:
+        score = "100%" if DNA[s:s+6] == start_motif and DNA[e:e+6] == end_motif else "0%"
+        scored.append((s, e, score))
+    return scored
+
 # This function highlights the common promoter motifs
 # Inserts a "[" before each promoter start and end, and a "]" 6 nucleotides after to create a bracketed space for each promoter motif
 def AnnotateValidPromoters(DNA: str, validPromoters):
@@ -75,10 +86,11 @@ if not InputValidation(DNA2):
     print("Invalid characters found. Only A,C,G,T are allowed.")
 startSegments, endSegments = FindIndexOfCSeqs(DNA2)
 valid = ValidateCSeqs(startSegments, endSegments)
+scored = ScorePromoters(DNA2, valid)
 annotated = AnnotateValidPromoters(DNA2, valid)
 
 # This section prints out the DNA sequence with promoters highlighted
 print("\nStarts:", startSegments)
 print("Ends:", endSegments)
-print("Valid Promoters (start_idx, end_idx):", valid)
+print("Valid Promoters with Score (start_idx, end_idx, score%):", scored)
 print("Full DNA With Valid Promoters Annotated:", annotated, "\n")
