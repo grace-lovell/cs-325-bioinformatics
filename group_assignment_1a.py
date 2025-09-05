@@ -89,7 +89,7 @@ valid = ValidateCSeqs(startSegments, endSegments)
 scored = ScorePromoters(DNA2, valid)
 annotated = AnnotateValidPromoters(DNA2, valid)
 
-# This section prints out the DNA sequence with promoters highlighted
+# This section prints out the DNA sequence with promoters highlighted and overall score match
 print("\nStarts:", startSegments)
 print("Ends:", endSegments)
 print("Valid Promoters with Score (start_idx, end_idx, score%):", scored)
