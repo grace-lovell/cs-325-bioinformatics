@@ -13,15 +13,15 @@ def FindIndexOfCSeqs(DNA: str):
     start_motif = "TTGACA"  # start of promoter (-35 CS)
     end_motif = "TATAAT"  # end of promoter (-10 CS)
     indexOfPotentialStartPromoters = []
-    indexOfPotentialEndPromoters = []
+    indexOfPotentialEndOfPromoters = []
     dnaLength = len(DNA)
     for i in range(0, dnaLength - 5):
         segment = DNA[i:i+6]
         if segment == start_motif:
             indexOfPotentialStartPromoters.append(i)
         if segment == end_motif:
-            indexOfPotentialEndPromoters.append(i)
-    return indexOfPotentialStartPromoters, indexOfPotentialEndPromoters
+            indexOfPotentialEndOfPromoters.append(i)
+    return indexOfPotentialStartPromoters, indexOfPotentialEndOfPromoters
 
 # This function makes sure that the promoter is valid
 # It is valid if the end sequence comes after the start sequence and there are 16–19 nucleotides between them
@@ -80,5 +80,5 @@ annotated = AnnotateValidPromoters(DNA2, valid)
 # This section prints out the DNA sequence with promoters highlighted
 print("\nStarts:", startSegments)
 print("Ends:", endSegments)
-print("Valid pairs (start_idx, end_idx):", valid)
-print("Valid consensus sequences:", annotated, "\n")
+print("Valid Promoters (start_idx, end_idx):", valid)
+print("Full DNA With Valid Promoters Annotated:", annotated, "\n")
